@@ -1,8 +1,9 @@
 # Mano Compiler
 
 Mano Compiler is a proof-of-concept compiler that converts a simple high-level
-language into the 25-instruction assembly dialect accepted by the Mano Machine.
-The result can then be assembled and executed on a simulator.
+language into the 25-instruction assembly dialect accepted by the
+[Mano Machine](http://en.wikipedia.org/wiki/Mano_machine). The result can then
+be assembled and executed on a simulator.
 
 The language supports integer, array and string data types, functions, and
 textual output of any variable. Being a proof of concept, it also has some
@@ -23,7 +24,7 @@ file. The -O flag can be used to produce optimized code.
 
 Once compiled, the code can be run using a simulator. However, due to the lack
 of linking, the runtime library used by the compiler (included in the
-distribution) has to be loaded manually. In manosim.exe, the whole sequence of
+distribution) has to be loaded manually. In `manosim.exe`, the whole sequence of
 assembling, loading and running a compiled program looks like this:
 
     * source lib
