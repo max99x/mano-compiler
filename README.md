@@ -16,6 +16,10 @@ standard library. It is portable to any platform that supports Python, and can
 be used to generate large amounts of assembly code to test new implementations
 of the machine or its simulator.
 
+Although it has little practical use, it may have educational value as an
+example of a very simple compiler that covers the whole path from reading plain
+text source code to emitting final assembly code in about 1K lines of code.
+
 ## Usage
 
 The compiler is invoked from the command line and passed the name of the file
