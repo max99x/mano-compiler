@@ -1,0 +1,226 @@
+FUNC main() RETURNS NONE:
+  VARS:
+    ARRAY[5] arr
+    ARRAY[5] sorted
+    WORD     low
+    WORD     high
+    WORD     total
+    WORD     avg
+    WORD     index
+
+    WORD     i
+    WORD     fib_of_i
+    WORD     test
+  CODE:
+    arr[0] = 7
+    arr[1] = 11
+    arr[2] = -3
+    arr[3] = 20
+    arr[4] = 1
+
+    low = min(arr)
+    high = max(arr)
+    total = sum(arr)
+    avg = total / 5
+
+    index = find(arr, 20)
+
+    sorted = arr
+    insertion_sort(sorted)
+
+    PRINT "Array: "
+    PRINT arr
+    PRINT "Sorted: "
+    PRINT sorted
+    PRINT "Min: "
+    PRINT low
+    PRINT
+    PRINT "Max: "
+    PRINT high
+    PRINT
+    PRINT "Sum: "
+    PRINT total
+    PRINT
+    PRINT "Avg: "
+    PRINT avg
+    PRINT
+    PRINT "20 can be found at index: "
+    PRINT index
+    PRINT
+    PRINT
+
+    PRINT "Fibonacci sequence: "
+    PRINT
+    i = 0
+    loop:
+      fib_of_i = fib(i)
+
+      PRINT i
+      PRINT ": "
+      PRINT fib_of_i
+      PRINT
+
+      i = i + 1
+      test = i <= 10
+      test ? GOTO loop
+END
+
+FUNC min(ARRAY[5] arr) RETURNS WORD:
+  VARS:
+    WORD index
+    WORD test
+    WORD result
+    WORD item
+  CODE:
+    index = 4
+
+    result = arr[4]
+
+    loop:
+      item = arr[index]
+
+      test = item < result
+      test ? result = item
+
+      index = index - 1
+
+      test = index >= 0
+      test ? GOTO loop
+
+    RETURN result
+END
+
+FUNC max(ARRAY[5] arr) RETURNS WORD:
+  VARS:
+    WORD index
+    WORD test
+    WORD result
+    WORD item
+  CODE:
+    index = 4
+
+    result = arr[4]
+
+    loop:
+      item = arr[index]
+
+      test = item > result
+      test ? result = item
+
+      index = index - 1
+
+      test = index >= 0
+      test ? GOTO loop
+
+    RETURN result
+END
+
+FUNC sum(ARRAY[5] arr) RETURNS WORD:
+  VARS:
+    WORD index
+    WORD test
+    WORD total
+    WORD item
+  CODE:
+    index = 4
+
+    total = 0
+
+    loop:
+      item = arr[index]
+
+      total = total + item
+
+      index = index - 1
+
+      test = index >= 0
+      test ? GOTO loop
+
+    RETURN total
+END
+
+FUNC fib(WORD n) RETURNS WORD:
+  VARS:
+    WORD i
+    WORD out
+    WORD test
+    WORD last
+    WORD lastlast
+  CODE:
+    test = n <= 1
+    test ? RETURN n
+
+    last = 1
+    lastlast = 0
+    i = 1
+
+    again:
+      out = last + lastlast
+      lastlast = last
+      last = out
+
+      i = i + 1
+      test = i < n
+      test ? GOTO again
+
+    RETURN out
+END
+
+FUNC find(ARRAY[5] arr, WORD target) RETURNS WORD:
+  VARS:
+    WORD index
+    WORD test
+    WORD item
+    WORD not_found
+  CODE:
+    not_found = -1
+    index = 0
+
+    loop:
+      item = arr[index]
+      test = item == target
+      test ? RETURN index
+
+      index = index + 1
+
+      test = index < 5
+      test ? GOTO loop
+
+    RETURN not_found
+END
+
+FUNC insertion_sort(ARRAY[5] arr) RETURNS NONE:
+  VARS:
+    WORD i
+    WORD j
+    WORD temp
+    WORD test
+    WORD value
+  CODE:
+    i = 1
+    pass:
+      value = arr[i]
+      j = i - 1
+
+      check_enter:
+        test = j < 0
+        test ? GOTO check_exit
+        temp = arr[j]
+        test = temp <= value
+        test ? GOTO check_exit
+
+        temp = j + 1
+        arr[temp] = arr[j]
+
+        j = j - 1
+
+        GOTO check_enter
+      check_exit:
+
+      j = j + 1
+      arr[j] = value
+
+      i = i + 1
+      test = i < 5
+      test ? GOTO pass
+END

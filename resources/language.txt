@@ -1,0 +1,43 @@
+<program>     := <function> | <function> <program>
+
+<function>    := FUNC <identifier> ( <parameters> ) RETURNS <rettype> : \n <vars_part> <code_part> "END"
+<rettype>     := NONE | <type>
+<parameters>  := <param> | λ
+<param>       := <var_def> | <var_def> , <param>
+
+<vars_part>   := VARS: \n <vars>
+<vars>        := <vars> \n <var_def> | λ
+<var_def>     := <type> <identifier>
+
+<code_part>   := CODE: \n <code>
+<code>        := <code> \n <code_line> | λ
+<code_line>   := <label> | <statement> | <comment>
+<statement>   := <identifier> ? <action> | <action>
+<action>      := <goto> | <input> | <output> | <return> | <assignment> | <call>
+
+<label>       := <identifier> :
+<goto>        := GOTO <identifier>
+<input>       := READ <identifier>
+<output>      := PRINT | PRINT <identifier>
+<return>      := RETURN | RETURN <identifier>
+<assignment>  := <identifier> = <expression> | identifier> [ <value> ] = <expression>
+
+<expression>  := <number> | <str_literal> | <identifier> | <identifier> [ <value> ] | <call> | <operation>
+<call>        := <identifier> ( <arguments> )
+<arguments>   := <args> | λ
+<args>        := <value> | <value> , <args>
+<operation>   := <unary_oper> | <binary_oper>
+<unary_oper>  := <unary_op> <value>
+<binary_oper> := <value> <binary_op> <value>
+
+<value>       := <identfier> | <number>
+<number>      := <dec_number> | <hex_number>
+<type>        := WORD | STRING [ <number> ] | ARRAY [ <number> ]
+
+<unary_op>    := REGEX: [-~]
+<binary_op>   := REGEX: [-+/*%&|^]|<<|>>|==|!=|>|>=|<|<=
+<comment>     := REGEX: #.*
+<identifier>  := REGEX: [A-Za-z][A-Za-z0-9_]*
+<str_literal> := REGEX: "([^"]|\")*"|'([^']|\')*'
+<dec_number>  := REGEX: -?[0-9]*
+<hex_number>  := REGEX: 0x[0-9A-Fa-f]*
