@@ -1,0 +1,1182 @@
+            ORG 0        ;Entry point
+            LDA main    
+            BSA push    
+            BSA call    
+            HLT         
+
+
+q00084,     AND var000   ;PARAM: ARRAY[5] q00084
+var000,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00085,     DEC 0       
+q00086,     DEC 0       
+q00087,     DEC 0       
+q00088,     DEC 0       
+q00089,     DEC 1       
+q00090,     DEC 1       
+q00091,     DEC 5       
+q00092,     DEC 1       
+q00093,     DEC 1       
+q00094,     DEC 1       
+q00095,     DEC 0       
+q00096,     DEC 0       
+q00097,     DEC 1       
+
+q00005,     AND fnc001   ;Address of q00005
+fnc001,     CLE          ;Function q00005
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00084
+            STA q00084  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00086 = q00093
+            LDA q00093  
+            BSA push    
+            BSA pop     
+            STA q00086  
+
+q00098,     CLE          ;{WORD} q00088 = q00084[q00086]
+            LDA q00084  
+            ADD q00086  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00088  
+
+            CLE          ;{WORD} q00087 = q00086-q00094
+            LDA q00094  
+            BSA push    
+            LDA q00086  
+            BSA sub     
+            BSA push    
+            BSA pop     
+            STA q00087  
+
+q00099,     CLE          ;{WORD} q00095 = q00087<q00096
+            LDA q00096  
+            BSA push    
+            LDA q00087  
+            BSA less    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00095  
+
+            LDA q00095   ;condition: q00095
+            SZA         
+            BUN cnd002  
+            BUN skp003  
+cnd002,     CLE          ;NOP
+            BUN q00100   ;GOTO q00100
+skp003,     CLE          ;NOP
+
+            CLE          ;{WORD} q00085 = q00084[q00087]
+            LDA q00084  
+            ADD q00087  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00085  
+
+            CLE          ;{WORD} q00095 = q00085<=q00088
+            LDA q00088  
+            BSA push    
+            LDA q00085  
+            BSA lesseq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00095  
+
+            LDA q00095   ;condition: q00095
+            SZA         
+            BUN cnd004  
+            BUN skp005  
+cnd004,     CLE          ;NOP
+            BUN q00100   ;GOTO q00100
+skp005,     CLE          ;NOP
+
+            CLE          ;{WORD} q00085 = q00087+q00097
+            LDA q00087  
+            ADD q00097  
+            BSA push    
+            BSA pop     
+            STA q00085  
+
+            CLE          ;{ARRAY[5]} q00084[q00085] = q00084[q00087]
+            LDA q00084  
+            ADD q00087  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            LDA q00084  
+            ADD q00085  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{WORD} q00087 = q00087-q00090
+            LDA q00090  
+            BSA push    
+            LDA q00087  
+            BSA sub     
+            BSA push    
+            BSA pop     
+            STA q00087  
+
+            BUN q00099   ;GOTO q00099
+
+q00100,     CLE          ;{WORD} q00087 = q00087+q00089
+            LDA q00087  
+            ADD q00089  
+            BSA push    
+            BSA pop     
+            STA q00087  
+
+            CLE          ;{ARRAY[5]} q00084[q00087] = q00088
+            LDA q00088  
+            BSA push    
+            LDA q00084  
+            ADD q00087  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{WORD} q00086 = q00086+q00092
+            LDA q00086  
+            ADD q00092  
+            BSA push    
+            BSA pop     
+            STA q00086  
+
+            CLE          ;{WORD} q00095 = q00086<q00091
+            LDA q00091  
+            BSA push    
+            LDA q00086  
+            BSA less    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00095  
+
+            LDA q00095   ;condition: q00095
+            SZA         
+            BUN cnd006  
+            BUN skp007  
+cnd006,     CLE          ;NOP
+            BUN q00098   ;GOTO q00098
+skp007,     CLE          ;NOP
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00037,     DEC 0       
+q00038,     DEC 1       
+q00039,     DEC 0       
+q00040,     DEC 0       
+q00041,     DEC 0       
+q00042,     DEC 1       
+q00043,     DEC 1       
+q00044,     DEC 0       
+q00045,     DEC 0       
+q00046,     DEC 1       
+q00047,     DEC 0       
+
+q00004,     AND fnc008   ;Address of q00004
+fnc008,     CLE          ;Function q00004
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00040
+            STA q00040  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00044 = q00040<=q00042
+            LDA q00042  
+            BSA push    
+            LDA q00040  
+            BSA lesseq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00044  
+
+            LDA q00044   ;condition: q00044
+            SZA         
+            BUN cnd009  
+            BUN skp010  
+cnd009,     CLE          ;NOP
+            BSA pop      ;RETURN q00040
+            STA temp1   
+            LDA q00040  
+            BSA push    
+            BUN temp1  I
+skp010,     CLE          ;NOP
+
+            CLE          ;{WORD} q00037 = q00043
+            LDA q00043  
+            BSA push    
+            BSA pop     
+            STA q00037  
+
+            CLE          ;{WORD} q00041 = q00045
+            LDA q00045  
+            BSA push    
+            BSA pop     
+            STA q00041  
+
+            CLE          ;{WORD} q00039 = q00046
+            LDA q00046  
+            BSA push    
+            BSA pop     
+            STA q00039  
+
+q00048,     CLE          ;{WORD} q00047 = q00037+q00041
+            LDA q00037  
+            ADD q00041  
+            BSA push    
+            BSA pop     
+            STA q00047  
+
+            CLE          ;{WORD} q00041 = q00037
+            LDA q00037  
+            BSA push    
+            BSA pop     
+            STA q00041  
+
+            CLE          ;{WORD} q00037 = q00047
+            LDA q00047  
+            BSA push    
+            BSA pop     
+            STA q00037  
+
+            CLE          ;{WORD} q00039 = q00039+q00038
+            LDA q00039  
+            ADD q00038  
+            BSA push    
+            BSA pop     
+            STA q00039  
+
+            CLE          ;{WORD} q00044 = q00039<q00040
+            LDA q00040  
+            BSA push    
+            LDA q00039  
+            BSA less    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00044  
+
+            LDA q00044   ;condition: q00044
+            SZA         
+            BUN cnd011  
+            BUN skp012  
+cnd011,     CLE          ;NOP
+            BUN q00048   ;GOTO q00048
+skp012,     CLE          ;NOP
+
+            BSA pop      ;RETURN q00047
+            STA temp1   
+            LDA q00047  
+            BSA push    
+            BUN temp1  I
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00101,     DEC 0       
+q00102,     AND var013   ;PARAM: ARRAY[5] q00102
+var013,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00103,     DEC 5       
+q00104,     DEC 0       
+q00105,     DEC 0       
+q00106,     DEC -1      
+q00107,     DEC 0       
+q00108,     DEC 0       
+q00109,     DEC 1       
+q00110,     DEC 0       
+
+q00006,     AND fnc014   ;Address of q00006
+fnc014,     CLE          ;Function q00006
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00104
+            STA q00104  
+            BSA pop      ;Processing arg q00102
+            STA q00102  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00110 = q00106
+            LDA q00106  
+            BSA push    
+            BSA pop     
+            STA q00110  
+
+            CLE          ;{WORD} q00101 = q00107
+            LDA q00107  
+            BSA push    
+            BSA pop     
+            STA q00101  
+
+q00111,     CLE          ;{WORD} q00105 = q00102[q00101]
+            LDA q00102  
+            ADD q00101  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00105  
+
+            CLE          ;{WORD} q00108 = q00105==q00104
+            LDA q00104  
+            BSA push    
+            LDA q00105  
+            BSA equal   
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00108  
+
+            LDA q00108   ;condition: q00108
+            SZA         
+            BUN cnd015  
+            BUN skp016  
+cnd015,     CLE          ;NOP
+            BSA pop      ;RETURN q00101
+            STA temp1   
+            LDA q00101  
+            BSA push    
+            BUN temp1  I
+skp016,     CLE          ;NOP
+
+            CLE          ;{WORD} q00101 = q00101+q00109
+            LDA q00101  
+            ADD q00109  
+            BSA push    
+            BSA pop     
+            STA q00101  
+
+            CLE          ;{WORD} q00108 = q00101<q00103
+            LDA q00103  
+            BSA push    
+            LDA q00101  
+            BSA less    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00108  
+
+            LDA q00108   ;condition: q00108
+            SZA         
+            BUN cnd017  
+            BUN skp018  
+cnd017,     CLE          ;NOP
+            BUN q00111   ;GOTO q00111
+skp018,     CLE          ;NOP
+
+            BSA pop      ;RETURN q00110
+            STA temp1   
+            LDA q00110  
+            BSA push    
+            BUN temp1  I
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00007,     DEC 0       
+q00008,     AND var019   ;PARAM: ARRAY[5] q00008
+var019,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00009,     DEC 0       
+q00010,     DEC 4       
+q00011,     DEC 0       
+q00012,     DEC 4       
+q00013,     DEC 0       
+q00014,     DEC 0       
+q00015,     DEC 1       
+
+q00001,     AND fnc020   ;Address of q00001
+fnc020,     CLE          ;Function q00001
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00008
+            STA q00008  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00007 = q00012
+            LDA q00012  
+            BSA push    
+            BSA pop     
+            STA q00007  
+
+            CLE          ;{WORD} q00011 = q00008[q00010]
+            LDA q00008  
+            ADD q00010  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00011  
+
+q00016,     CLE          ;{WORD} q00009 = q00008[q00007]
+            LDA q00008  
+            ADD q00007  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00009  
+
+            CLE          ;{WORD} q00013 = q00009<q00011
+            LDA q00011  
+            BSA push    
+            LDA q00009  
+            BSA less    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00013  
+
+            LDA q00013   ;condition: q00013
+            SZA         
+            BUN cnd021  
+            BUN skp022  
+cnd021,     CLE          ;NOP
+            CLE          ;{WORD} q00011 = q00009
+            LDA q00009  
+            BSA push    
+            BSA pop     
+            STA q00011  
+skp022,     CLE          ;NOP
+
+            CLE          ;{WORD} q00007 = q00007-q00015
+            LDA q00015  
+            BSA push    
+            LDA q00007  
+            BSA sub     
+            BSA push    
+            BSA pop     
+            STA q00007  
+
+            CLE          ;{WORD} q00013 = q00007>=q00014
+            LDA q00014  
+            BSA push    
+            LDA q00007  
+            BSA moreeq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00013  
+
+            LDA q00013   ;condition: q00013
+            SZA         
+            BUN cnd023  
+            BUN skp024  
+cnd023,     CLE          ;NOP
+            BUN q00016   ;GOTO q00016
+skp024,     CLE          ;NOP
+
+            BSA pop      ;RETURN q00011
+            STA temp1   
+            LDA q00011  
+            BSA push    
+            BUN temp1  I
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00027,     DEC 0       
+q00028,     AND var025   ;PARAM: ARRAY[5] q00028
+var025,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00029,     DEC 0       
+q00030,     DEC 0       
+q00031,     DEC 1       
+q00032,     DEC 4       
+q00033,     DEC 0       
+q00034,     DEC 0       
+q00035,     DEC 0       
+
+q00003,     AND fnc026   ;Address of q00003
+fnc026,     CLE          ;Function q00003
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00028
+            STA q00028  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00027 = q00032
+            LDA q00032  
+            BSA push    
+            BSA pop     
+            STA q00027  
+
+            CLE          ;{WORD} q00035 = q00030
+            LDA q00030  
+            BSA push    
+            BSA pop     
+            STA q00035  
+
+q00036,     CLE          ;{WORD} q00029 = q00028[q00027]
+            LDA q00028  
+            ADD q00027  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00029  
+
+            CLE          ;{WORD} q00035 = q00035+q00029
+            LDA q00035  
+            ADD q00029  
+            BSA push    
+            BSA pop     
+            STA q00035  
+
+            CLE          ;{WORD} q00027 = q00027-q00031
+            LDA q00031  
+            BSA push    
+            LDA q00027  
+            BSA sub     
+            BSA push    
+            BSA pop     
+            STA q00027  
+
+            CLE          ;{WORD} q00033 = q00027>=q00034
+            LDA q00034  
+            BSA push    
+            LDA q00027  
+            BSA moreeq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00033  
+
+            LDA q00033   ;condition: q00033
+            SZA         
+            BUN cnd027  
+            BUN skp028  
+cnd027,     CLE          ;NOP
+            BUN q00036   ;GOTO q00036
+skp028,     CLE          ;NOP
+
+            BSA pop      ;RETURN q00035
+            STA temp1   
+            LDA q00035  
+            BSA push    
+            BUN temp1  I
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00017,     DEC 0       
+q00018,     AND var029   ;PARAM: ARRAY[5] q00018
+var029,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00019,     DEC 0       
+q00020,     DEC 4       
+q00021,     DEC 0       
+q00022,     DEC 4       
+q00023,     DEC 0       
+q00024,     DEC 0       
+q00025,     DEC 1       
+
+q00002,     AND fnc030   ;Address of q00002
+fnc030,     CLE          ;Function q00002
+            BSA pop      ;Getting return address
+            STA temp1   
+            BSA pop      ;Processing arg q00018
+            STA q00018  
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{WORD} q00017 = q00022
+            LDA q00022  
+            BSA push    
+            BSA pop     
+            STA q00017  
+
+            CLE          ;{WORD} q00021 = q00018[q00020]
+            LDA q00018  
+            ADD q00020  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00021  
+
+q00026,     CLE          ;{WORD} q00019 = q00018[q00017]
+            LDA q00018  
+            ADD q00017  
+            STA temp1   
+            LDA temp1  I
+            BSA push    
+            BSA pop     
+            STA q00019  
+
+            CLE          ;{WORD} q00023 = q00019>q00021
+            LDA q00021  
+            BSA push    
+            LDA q00019  
+            BSA more    
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00023  
+
+            LDA q00023   ;condition: q00023
+            SZA         
+            BUN cnd031  
+            BUN skp032  
+cnd031,     CLE          ;NOP
+            CLE          ;{WORD} q00021 = q00019
+            LDA q00019  
+            BSA push    
+            BSA pop     
+            STA q00021  
+skp032,     CLE          ;NOP
+
+            CLE          ;{WORD} q00017 = q00017-q00025
+            LDA q00025  
+            BSA push    
+            LDA q00017  
+            BSA sub     
+            BSA push    
+            BSA pop     
+            STA q00017  
+
+            CLE          ;{WORD} q00023 = q00017>=q00024
+            LDA q00024  
+            BSA push    
+            LDA q00017  
+            BSA moreeq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00023  
+
+            LDA q00023   ;condition: q00023
+            SZA         
+            BUN cnd033  
+            BUN skp034  
+cnd033,     CLE          ;NOP
+            BUN q00026   ;GOTO q00026
+skp034,     CLE          ;NOP
+
+            BSA pop      ;RETURN q00021
+            STA temp1   
+            LDA q00021  
+            BSA push    
+            BUN temp1  I
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
+
+
+q00049,     AND var035   ;ARRAY[5] q00049
+var035,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00050,     DEC 0       
+q00051,     DEC 0       
+q00052,     AND var036   ;STRING[27] q00052 = '20 can be found at index: '
+var036,     DEC 50      
+            DEC 48      
+            DEC 32      
+            DEC 99      
+            DEC 97      
+            DEC 110     
+            DEC 32      
+            DEC 98      
+            DEC 101     
+            DEC 32      
+            DEC 102     
+            DEC 111     
+            DEC 117     
+            DEC 110     
+            DEC 100     
+            DEC 32      
+            DEC 97      
+            DEC 116     
+            DEC 32      
+            DEC 105     
+            DEC 110     
+            DEC 100     
+            DEC 101     
+            DEC 120     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00053,     DEC 0       
+q00054,     DEC 0       
+q00055,     DEC 0       
+q00056,     DEC 5       
+q00057,     DEC 20      
+q00058,     AND var037   ;STRING[8] q00058 = 'Array: '
+var037,     DEC 65      
+            DEC 114     
+            DEC 114     
+            DEC 97      
+            DEC 121     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00059,     AND var038   ;STRING[9] q00059 = 'Sorted: '
+var038,     DEC 83      
+            DEC 111     
+            DEC 114     
+            DEC 116     
+            DEC 101     
+            DEC 100     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00060,     AND var039   ;STRING[6] q00060 = 'Min: '
+var039,     DEC 77      
+            DEC 105     
+            DEC 110     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00061,     AND var040   ;STRING[6] q00061 = 'Max: '
+var040,     DEC 77      
+            DEC 97      
+            DEC 120     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00062,     AND var041   ;STRING[6] q00062 = 'Sum: '
+var041,     DEC 83      
+            DEC 117     
+            DEC 109     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00063,     AND var042   ;STRING[6] q00063 = 'Avg: '
+var042,     DEC 65      
+            DEC 118     
+            DEC 103     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00064,     DEC 0       
+q00065,     DEC 0       
+q00066,     DEC 10      
+q00067,     DEC 1       
+q00068,     AND var043   ;STRING[3] q00068 = ': '
+var043,     DEC 58      
+            DEC 32      
+            DEC 0       
+q00069,     AND var044   ;STRING[21] q00069 = 'Fibonacci sequence: '
+var044,     DEC 70      
+            DEC 105     
+            DEC 98      
+            DEC 111     
+            DEC 110     
+            DEC 97      
+            DEC 99      
+            DEC 99      
+            DEC 105     
+            DEC 32      
+            DEC 115     
+            DEC 101     
+            DEC 113     
+            DEC 117     
+            DEC 101     
+            DEC 110     
+            DEC 99      
+            DEC 101     
+            DEC 58      
+            DEC 32      
+            DEC 0       
+q00070,     DEC 0       
+q00071,     AND var045   ;ARRAY[5] q00071
+var045,     DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+            DEC 0       
+q00072,     DEC 0       
+q00073,     DEC 7       
+q00074,     DEC 0       
+q00075,     DEC 11      
+q00076,     DEC 1       
+q00077,     DEC -3      
+q00078,     DEC 2       
+q00079,     DEC 20      
+q00080,     DEC 3       
+q00081,     DEC 1       
+q00082,     DEC 4       
+
+main,       AND fnc046   ;Address of main
+fnc046,     CLE          ;Function main
+            BSA pop      ;Getting return address
+            STA temp1   
+            LDA temp1   
+            BSA push     ;Putting return address back
+            CLE          ;{ARRAY[5]} q00049[q00074] = q00073
+            LDA q00073  
+            BSA push    
+            LDA q00049  
+            ADD q00074  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{ARRAY[5]} q00049[q00076] = q00075
+            LDA q00075  
+            BSA push    
+            LDA q00049  
+            ADD q00076  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{ARRAY[5]} q00049[q00078] = q00077
+            LDA q00077  
+            BSA push    
+            LDA q00049  
+            ADD q00078  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{ARRAY[5]} q00049[q00080] = q00079
+            LDA q00079  
+            BSA push    
+            LDA q00049  
+            ADD q00080  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{ARRAY[5]} q00049[q00082] = q00081
+            LDA q00081  
+            BSA push    
+            LDA q00049  
+            ADD q00082  
+            STA temp1   
+            BSA pop     
+            STA temp1  I
+
+            CLE          ;{WORD} q00064 = q00001(q00049)
+            LDA q00049  
+            BSA push    
+            LDA q00001  
+            BSA push    
+            BSA call    
+            BSA pop     
+            STA q00064  
+
+            CLE          ;{WORD} q00050 = q00002(q00049)
+            LDA q00049  
+            BSA push    
+            LDA q00002  
+            BSA push    
+            BSA call    
+            BSA pop     
+            STA q00050  
+
+            CLE          ;{WORD} q00054 = q00003(q00049)
+            LDA q00049  
+            BSA push    
+            LDA q00003  
+            BSA push    
+            BSA call    
+            BSA pop     
+            STA q00054  
+
+            CLE          ;{WORD} q00051 = q00054/q00056
+            LDA q00056  
+            BSA push    
+            LDA q00054  
+            BSA div     
+            BSA push    
+            BSA pop     
+            STA q00051  
+
+            CLE          ;{WORD} q00053 = q00006(q00049, q00057)
+            LDA q00049  
+            BSA push    
+            LDA q00057  
+            BSA push    
+            LDA q00006  
+            BSA push    
+            BSA call    
+            BSA pop     
+            STA q00053  
+
+            CLE          ;{ARRAY[5]} q00071 = q00049
+            LDA q00049  
+            BSA push    
+            LDA q00071  
+            STA temp1   
+            BSA pop     
+            STA temp2   
+            LDA temp2  I
+            STA temp1  I
+            ISZ temp1    ;Always > 0 so just a memory INC
+            ISZ temp2    ;Always > 0 so just a memory INC
+            LDA temp2  I
+            STA temp1  I
+            ISZ temp1    ;Always > 0 so just a memory INC
+            ISZ temp2    ;Always > 0 so just a memory INC
+            LDA temp2  I
+            STA temp1  I
+            ISZ temp1    ;Always > 0 so just a memory INC
+            ISZ temp2    ;Always > 0 so just a memory INC
+            LDA temp2  I
+            STA temp1  I
+            ISZ temp1    ;Always > 0 so just a memory INC
+            ISZ temp2    ;Always > 0 so just a memory INC
+            LDA temp2  I
+            STA temp1  I
+            ISZ temp1    ;Always > 0 so just a memory INC
+            ISZ temp2    ;Always > 0 so just a memory INC
+
+            CLE          ;q00005(q00071)
+            LDA q00071  
+            BSA push    
+            LDA q00005  
+            BSA push    
+            BSA call    
+            BSA pop     
+
+            LDA q00058   ;PRINT string q00058
+            BSA push    
+            BSA outstr  
+
+            LDA q00049   ;PRINT array q00049
+            STA temp1   
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            BSA outnln  
+
+            LDA q00059   ;PRINT string q00059
+            BSA push    
+            BSA outstr  
+
+            LDA q00071   ;PRINT array q00071
+            STA temp1   
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            LDA temp1  I
+            BSA outdec  
+            LDA chrspc  
+            BSA outchr  
+            ISZ temp1    ;Always > 0 so just a memory INC
+            BSA outnln  
+
+            LDA q00060   ;PRINT string q00060
+            BSA push    
+            BSA outstr  
+
+            LDA q00064   ;PRINT word q00064
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            LDA q00061   ;PRINT string q00061
+            BSA push    
+            BSA outstr  
+
+            LDA q00050   ;PRINT word q00050
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            LDA q00062   ;PRINT string q00062
+            BSA push    
+            BSA outstr  
+
+            LDA q00054   ;PRINT word q00054
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            LDA q00063   ;PRINT string q00063
+            BSA push    
+            BSA outstr  
+
+            LDA q00051   ;PRINT word q00051
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            LDA q00052   ;PRINT string q00052
+            BSA push    
+            BSA outstr  
+
+            LDA q00053   ;PRINT word q00053
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            BSA outnln   ;Print new line
+
+            LDA q00069   ;PRINT string q00069
+            BSA push    
+            BSA outstr  
+
+            BSA outnln   ;Print new line
+
+            CLE          ;{WORD} q00072 = q00070
+            LDA q00070  
+            BSA push    
+            BSA pop     
+            STA q00072  
+
+q00083,     CLE          ;{WORD} q00055 = q00004(q00072)
+            LDA q00072  
+            BSA push    
+            LDA q00004  
+            BSA push    
+            BSA call    
+            BSA pop     
+            STA q00055  
+
+            LDA q00072   ;PRINT word q00072
+            BSA outdec  
+
+            LDA q00068   ;PRINT string q00068
+            BSA push    
+            BSA outstr  
+
+            LDA q00055   ;PRINT word q00055
+            BSA outdec  
+
+            BSA outnln   ;Print new line
+
+            CLE          ;{WORD} q00072 = q00072+q00067
+            LDA q00072  
+            ADD q00067  
+            BSA push    
+            BSA pop     
+            STA q00072  
+
+            CLE          ;{WORD} q00065 = q00072<=q00066
+            LDA q00066  
+            BSA push    
+            LDA q00072  
+            BSA lesseq  
+            CLA         
+            CIL         
+            BSA push    
+            BSA pop     
+            STA q00065  
+
+            LDA q00065   ;condition: q00065
+            SZA         
+            BUN cnd047  
+            BUN skp048  
+cnd047,     CLE          ;NOP
+            BUN q00083   ;GOTO q00083
+skp048,     CLE          ;NOP
+
+            BSA pop      ;RETURN 
+            STA temp1   
+            LDA null    
+            BSA push    
+            BUN temp1  I
+
